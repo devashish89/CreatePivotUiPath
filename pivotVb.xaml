@@ -1,0 +1,82 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="pivotVb" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="701,592" sap2010:WorkflowViewState.IdRef="pivotVb_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:moie="clr-namespace:Microsoft.Office.Interop.Excel;assembly=UiPath.Excel" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="21">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="23">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.Office.Interop.Excel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>UiPath.DocumentUnderstanding.ML.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="pivotVb" sap:VirtualizedContainerService.HintSize="376,487" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="test" />
+      <Variable x:TypeArguments="x:String" Name="file" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[file]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Directory.GetFiles(Environment.CurrentDirectory, "pivot.xlsx", SearchOption.AllDirectories)(0)]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[file]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim xlworkBook As Microsoft.Office.Interop.Excel.Workbook&#xD;&#xA;Dim xlworkSheet As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim xlworkPivotSheet As Microsoft.Office.Interop.Excel.Worksheet&#xD;&#xA;Dim connection As Microsoft.Office.Interop.Excel.WorkbookConnection&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;Try&#xD;&#xA; xlApp = New Microsoft.Office.Interop.Excel.Application&#xD;&#xA; &#xD;&#xA; xlApp.Visible=True&#xD;&#xA; xlApp.DisplayAlerts=False&#xD;&#xA; 'MsgBox(&quot;Here&quot;)&#xD;&#xA; xlworkBook = xlapp.Workbooks.Open(file)&#xD;&#xA; &#xD;&#xA; xlworkSheet = CType(xlworkBook.Sheets(&quot;Sheet1&quot;),Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA;&#xD;&#xA; xlworkPivotSheet = CType(xlworkBook.Sheets.Add,Microsoft.Office.Interop.Excel.Worksheet)&#xD;&#xA; &#xD;&#xA; xlworkPivotSheet.Name = &quot;Pivot&quot;&#xD;&#xA; &#xD;&#xA; 'Deleting the Connection If any before creating Pivot&#xD;&#xA; Dim conDelete As Microsoft.Office.Interop.Excel.WorkbookConnection&#xD;&#xA; For Each conDelete In xlworkBook.Connections&#xD;&#xA; If conDelete.Name &lt;&gt; &quot;ThisWorkbookDataModel&quot; Then 'Default name of connection &#xD;&#xA;  conDelete.delete&#xD;&#xA; End If&#xD;&#xA; Next&#xD;&#xA; &#xD;&#xA;'Creating Connection&#xD;&#xA;With xlworkBook&#xD;&#xA;  connection =  .Connections.Add2(Name :=&quot;DataModel&quot;,Description:=&quot;DataModel&quot;,ConnectionString:=&quot;WORKSHEET;&quot;+xlworkBook.FullName,CommandText:=xlworkSheet.Name+&quot;!&quot;+xlworkSheet.Range(&quot;A1&quot;).CurrentRegion.address,lCmdtype:=Microsoft.Office.Interop.Excel.XlCmdType.xlCmdExcel,CreateModelConnection:=True)     &#xD;&#xA;End With &#xD;&#xA;&#xD;&#xA;Dim pivot_rng As microsoft.Office.Interop.Excel.Range&#xD;&#xA;&#xD;&#xA;&#xD;&#xA; pivot_rng= CType(xlworkPivotSheet.Cells(1,1),Microsoft.Office.Interop.Excel.Range) 'Specify the first cell for the pivot table'&#xD;&#xA;&#xD;&#xA; 'Creation pivot Cache and pivot table '&#xD;&#xA; Dim oPivotCache As Microsoft.Office.Interop.Excel.PivotCache=Nothing&#xD;&#xA; Dim oPivotTables As Microsoft.Office.Interop.Excel.PivotTables=Nothing&#xD;&#xA; Dim oPivotTable As Microsoft.Office.Interop.Excel.PivotTable=Nothing&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;oPivotCache =CType(xlworkBook.PivotCaches.Create(SourceType:=Microsoft.Office.Interop.Excel.XlPivotTableSourceType.xlExternal,SourceData:=connection,Version:=Microsoft.Office.Interop.Excel.XlPivotTableVersionList.xlPivotTableVersion15),Microsoft.Office.Interop.Excel.PivotCache)&#xD;&#xA;&#xD;&#xA;oPivotTables=DirectCast(xlworkPivotSheet.PivotTables(Type.Missing),Microsoft.Office.Interop.Excel.PivotTables)&#xD;&#xA;&#xD;&#xA; oPivotTable=oPivotTables.Add(oPivotCache,pivot_rng,&quot;PivotTable&quot;,Type.Missing,Type.Missing) 'first paramenter is cache,range the table should start,table name'&#xD;&#xA; oPivotTable.SmallGrid=False&#xD;&#xA; oPivotTable.ShowTableStyleRowStripes=True&#xD;&#xA; oPivotTable.TableStyle2=&quot;PivotStyleLight2&quot;&#xD;&#xA; &#xD;&#xA; 'Creation of pivot Fields/cubefield means column'&#xD;&#xA; &#xD;&#xA;&#xD;&#xA;Dim CubeField1 As Microsoft.Office.Interop.Excel.CubeField &#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Dim index As Integer = 1&#xD;&#xA;While index &lt;= CInt(oPivotTable.CubeFields.Count)&#xD;&#xA; &#xD;&#xA; If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Product]&quot;) Then &#xD;&#xA; &#xD;&#xA;  CubeField1 = oPivotTable.CubeFields(index)&#xD;&#xA;  CubeField1.Orientation = Microsoft.Office.Interop.Excel.XlPivotFieldOrientation.xlRowField 'Change tthe type to row&#xD;&#xA;  &#xD;&#xA; Else &#xD;&#xA; End If&#xD;&#xA; &#xD;&#xA; &#xD;&#xA; &#xD;&#xA; If oPivotTable.CubeFields(index).Name.ToString.Equals(&quot;[Range].[Price]&quot;) Then &#xD;&#xA; &#xD;&#xA;     CubeField1= oPivotTable.CubeFields.GetMeasure(oPivotTable.CubeFields(index).Name,Microsoft.Office.Interop.Excel.XlConsolidationFunction.xlSum)&#xD;&#xA;     oPivotTable.AddDataField(CubeField1)&#xD;&#xA; Else &#xD;&#xA; End If&#xD;&#xA; &#xD;&#xA; index += 1&#xD;&#xA;End While&#xD;&#xA;&#xD;&#xA;'------------------Change Layout&#xD;&#xA;oPivotTable.RowAxisLayout(Microsoft.Office.Interop.Excel.XlLayoutRowType.xlTabularRow)  &#xD;&#xA;&#xD;&#xA; &#xD;&#xA; Catch e As exception&#xD;&#xA; Console.WriteLine(e)&#xD;&#xA;Finally&#xD;&#xA; xlworkBook.Save()&#xD;&#xA; xlworkBook.Close()&#xD;&#xA; xlApp.Quit()&#xD;&#xA;End Try&#xD;&#xA; &#xD;&#xA; " DisplayName="Invoke code" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="moie:Application" x:Key="xlApp" />
+        <InArgument x:TypeArguments="x:String" x:Key="file">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="file" />
+        </InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+  </Sequence>
+</Activity>
